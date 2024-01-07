@@ -13,4 +13,3 @@ public class Encryption {
         return newText;
     }
 }
-//  C:\Users\Aleksandr\IdeaProjects\com.javarush.cryptoanalyzer.Sibrikov

@@ -8,8 +8,7 @@ public class Decryption {
 
             for (int j = 0; j < Caesar.ALPHABET.length; j++)
                 if (Caesar.ALPHABET[j] == text[i]) {
-
-                    int deVal = j - shift;
+                    int deVal = j - shift % Caesar.ALPHABET.length;
 
                     if (deVal < 0) {
                         deVal = Caesar.ALPHABET.length + deVal;

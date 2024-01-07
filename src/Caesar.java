@@ -1,10 +1,5 @@
-
-
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Caesar {
@@ -15,9 +10,7 @@ public class Caesar {
             'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я',
             '.', ',', '«', '»', '"', '\'', ':', ';', '!', '?', '-', '_', ' ', '%', '(', ')', '}', '{'};
     private static char[] textChar;
-
     private static ArrayList<Character> arrayList = new ArrayList<>();
-    private static char[] newTextChar;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -27,83 +20,81 @@ public class Caesar {
 
         System.out.println("Введите ссылку на текст: ");
 
-
         try (Scanner scan = new Scanner(System.in);
              BufferedReader bufferedReader = new BufferedReader(new FileReader(scan.nextLine()));
              BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(scan.nextLine()))) {
 
-            if (poz == 1 || poz == 2) {
-                System.out.println("ключ: ");
-                int key = sc.nextInt();
-                while (bufferedReader.ready()) {
-                    String line = bufferedReader.readLine();
-                    textChar = line.toCharArray();
+
+            while (bufferedReader.ready()) {
+                String line = bufferedReader.readLine();
+                textChar = line.toCharArray();
+
+
+                if (poz == 1 || poz == 2) {
+
+                    System.out.println("ключ: ");
+                    int key = sc.nextInt();
 
                     if (poz == 1) {
-                        char[] econ = Encryption.econ(textChar, key);
 
+                        char[] econ = Encryption.econ(textChar, key);
                         for (char a : econ) {
                             arrayList.add(a);
                         }
 
-                    }   // перевели все на лист и пробую вернуть массив
+                    }
 
-                    if (poz == 2) {
+                   else if (poz == 2) {
                         char[] econ = Decryption.decon(textChar, key);
                         for (char a : econ) {
                             arrayList.add(a);
                         }
 
                     }
-
                 }
-            }
 
 
-
-            if (poz == 3) {
-
-                while (bufferedReader.ready()) {
-                    String line = bufferedReader.readLine(); // считываем и добовляем в лист
-                    textChar = line.toCharArray();
+               else if (poz == 3) {
 
                     for (char a : textChar) {
                         arrayList.add(a);
                     }
-                }
-                char[] aa = new char[arrayList.size()];   // из листа в массив
-                for (int i = 0; i < arrayList.size(); i++) {
-                    aa[i] = arrayList.get(i);
 
-                }
-
-                for (int i = 1; i <= ALPHABET.length; i++) {
-
-                    for (char a : Decryption.decon(aa, i)) {
-                        bufferedWriter.write(a);
-
+                    char[] aa = new char[arrayList.size()];   // из листа в массив
+                    for (int i = 0; i < arrayList.size(); i++) {
+                        aa[i] = arrayList.get(i);
                     }
-                    bufferedWriter.write(" - " + i);
-                    bufferedWriter.write("\n");
-                }
 
+                    for (int i = 1; i <= ALPHABET.length; i++) {
+
+                        bufferedWriter.write("Взломанный текст: \"");
+
+                        for (char a : Decryption.decon(aa, i)) {
+                            bufferedWriter.write(a);
+
+                        }
+                        bufferedWriter.write("\" - Номер ключа: " + i);
+                        bufferedWriter.write("\n");
+                        bufferedWriter.write("\n");
+                    }
+
+                }
             }
-            if(poz ==1 || poz ==2) {
+
+            if (poz == 1 || poz == 2) {
                 for (char a : arrayList) {
 
-                    bufferedWriter.write(a);  // запись в файл
+                    bufferedWriter.write(a);
                 }
             }
 
-            System.out.println((arrayList));
+
         } catch (
                 Exception e) {
             e.printStackTrace();
         }
 
-
     }
-
 
 }
 
