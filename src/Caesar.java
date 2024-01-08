@@ -24,68 +24,59 @@ public class Caesar {
              BufferedReader bufferedReader = new BufferedReader(new FileReader(scan.nextLine()));
              BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(scan.nextLine()))) {
 
+            if (poz == 1 || poz == 2) {
+                System.out.println("ключ: ");
+                int key = sc.nextInt();
+                while (bufferedReader.ready()) {
+                    String line = bufferedReader.readLine();
+                    textChar = line.toCharArray();
 
-            while (bufferedReader.ready()) {
-                String line = bufferedReader.readLine();
-                textChar = line.toCharArray();
-
-
-                if (poz == 1 || poz == 2) {
-
-                    System.out.println("ключ: ");
-                    int key = sc.nextInt();
 
                     if (poz == 1) {
 
                         char[] econ = Encryption.econ(textChar, key);
                         for (char a : econ) {
-                            arrayList.add(a);
+                            bufferedWriter.write(a);
                         }
+                        bufferedWriter.write("\n");
 
-                    }
-
-                   else if (poz == 2) {
+                    } else if (poz == 2) {
                         char[] econ = Decryption.decon(textChar, key);
                         for (char a : econ) {
-                            arrayList.add(a);
+                            bufferedWriter.write(a);
                         }
-
+                        bufferedWriter.write("\n");
                     }
                 }
+            } else if (poz == 3) {
 
-
-               else if (poz == 3) {
+                while (bufferedReader.ready()) {
+                    String line = bufferedReader.readLine();
+                    textChar = line.toCharArray();
 
                     for (char a : textChar) {
                         arrayList.add(a);
                     }
-
-                    char[] aa = new char[arrayList.size()];   // из листа в массив
-                    for (int i = 0; i < arrayList.size(); i++) {
-                        aa[i] = arrayList.get(i);
-                    }
-
-                    for (int i = 1; i <= ALPHABET.length; i++) {
-
-                        bufferedWriter.write("Взломанный текст: \"");
-
-                        for (char a : Decryption.decon(aa, i)) {
-                            bufferedWriter.write(a);
-
-                        }
-                        bufferedWriter.write("\" - Номер ключа: " + i);
-                        bufferedWriter.write("\n");
-                        bufferedWriter.write("\n");
-                    }
-
                 }
-            }
 
-            if (poz == 1 || poz == 2) {
-                for (char a : arrayList) {
-
-                    bufferedWriter.write(a);
+                char[] aa = new char[arrayList.size()];   // из листа в массив
+                for (int i = 0; i < arrayList.size(); i++) {
+                    aa[i] = arrayList.get(i);
                 }
+
+                for (int i = 1; i <= ALPHABET.length; i++) {
+
+                    bufferedWriter.write("Взломанный текст: \"");
+
+                    for (char a : Decryption.decon(aa, i)) {
+                        bufferedWriter.write(a);
+
+                    }
+                    bufferedWriter.write("\" - Номер ключа: " + i);
+                    bufferedWriter.write("\n");
+                    bufferedWriter.write("\n");
+                }
+
             }
 
 
