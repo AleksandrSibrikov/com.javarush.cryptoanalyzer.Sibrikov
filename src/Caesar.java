@@ -18,12 +18,11 @@ public class Caesar {
         System.out.print("Введите номер команды: ");
         int poz = sc.nextInt();
 
-        System.out.println("Введите ссылку на текст: ");
+        System.out.println("Введите ссылку на файл и место куда его сохранить: ");
 
         try (Scanner scan = new Scanner(System.in);
              BufferedReader bufferedReader = new BufferedReader(new FileReader(scan.nextLine()));
              BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(scan.nextLine()))) {
-
             if (poz == 1 || poz == 2) {
                 System.out.println("ключ: ");
                 int key = sc.nextInt();
@@ -37,6 +36,7 @@ public class Caesar {
                         char[] econ = Encryption.econ(textChar, key);
                         for (char a : econ) {
                             bufferedWriter.write(a);
+
                         }
                         bufferedWriter.write("\n");
 
@@ -80,8 +80,9 @@ public class Caesar {
             }
 
 
-        } catch (
-                Exception e) {
+        } catch (FileNotFoundException e){
+            System.out.println("Такаго файла нет");
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
