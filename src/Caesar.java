@@ -18,7 +18,7 @@ public class Caesar {
         System.out.print("Введите номер команды: ");
         int poz = sc.nextInt();
 
-        System.out.println("Введите ссылку на файл и место куда его сохранить: ");
+        System.out.println("Введите ссылку на файл, нажмите \"Enter\" и введите место куда его сохранить: ");
 
         try (Scanner scan = new Scanner(System.in);
              BufferedReader bufferedReader = new BufferedReader(new FileReader(scan.nextLine()));
